@@ -1,6 +1,7 @@
 package com.aduilio.viasat.ubersat.activity
 
 import android.os.Bundle
+import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.aduilio.viasat.ubersat.R
@@ -36,9 +37,13 @@ class MainActivity : AppCompatActivity() {
             planAdapter.setPlans(it)
         }
 
-//        planViewModel.showProgress.observe(this, {
-//            binding.srlMatches.isRefreshing = it
-//        })
+        planViewModel.showProgress.observe(this) { show ->
+            if (show) {
+                binding.cpiPlans.visibility = View.VISIBLE
+            } else {
+                binding.cpiPlans.visibility = View.GONE
+            }
+        }
 
         planViewModel.resultSuccess.observe(this) {
             showErrorMessage(it)

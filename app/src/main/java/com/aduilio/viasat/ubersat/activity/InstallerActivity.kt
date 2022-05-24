@@ -2,6 +2,7 @@ package com.aduilio.viasat.ubersat.activity
 
 import android.os.Bundle
 import android.view.MenuItem
+import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.aduilio.viasat.ubersat.R
@@ -45,6 +46,14 @@ class InstallerActivity : AppCompatActivity() {
     private fun setupViewModel() {
         installerViewModel.installers.observe(this) {
             installerAdapter.setInstallers(it)
+        }
+
+        installerViewModel.showProgress.observe(this) { show ->
+            if (show) {
+                binding.cpiInstallers.visibility = View.VISIBLE
+            } else {
+                binding.cpiInstallers.visibility = View.GONE
+            }
         }
 
         installerViewModel.resultSuccess.observe(this) {
