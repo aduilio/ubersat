@@ -1,5 +1,6 @@
 package com.aduilio.viasat.ubersat.activity
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
@@ -15,6 +16,7 @@ class PlanActivity : AppCompatActivity() {
     }
 
     private lateinit var binding: ActivityPlanBinding
+    private var planId: Long = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -24,6 +26,14 @@ class PlanActivity : AppCompatActivity() {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         loadPLan()
+
+        binding.btSeeInstallers.setOnClickListener {
+            val intent = Intent(
+                this@PlanActivity,
+                InstallerActivity::class.java
+            ).putExtra(PLAN_PARAM, planId)
+            startActivity(intent)
+        }
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -36,6 +46,7 @@ class PlanActivity : AppCompatActivity() {
 
     private fun loadPLan() {
         intent?.extras?.getParcelable<Plan>(PLAN_PARAM)?.let {
+            planId = it.id
             setDetails(it)
         }
     }

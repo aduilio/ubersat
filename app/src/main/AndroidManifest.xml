@@ -23,6 +23,9 @@
         <activity
             android:name=".activity.PlanActivity"
             android:exported="false" />
+        <activity
+            android:name=".activity.InstallerActivity"
+            android:exported="false" />
     </application>
 
 </manifest>

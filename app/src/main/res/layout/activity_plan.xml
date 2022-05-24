@@ -20,6 +20,7 @@
         tools:text="Plan details" />
 
     <Button
+        android:id="@+id/btSeeInstallers"
         android:layout_width="match_parent"
         android:layout_height="?android:attr/actionBarSize"
         android:layout_marginTop="@dimen/margin_default"

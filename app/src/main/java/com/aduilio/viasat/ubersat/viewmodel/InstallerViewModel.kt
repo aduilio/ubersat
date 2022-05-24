@@ -2,25 +2,25 @@ package com.aduilio.viasat.ubersat.viewmodel
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.aduilio.viasat.ubersat.api.PlanApi
+import com.aduilio.viasat.ubersat.api.InstallerApi
 import com.aduilio.viasat.ubersat.common.Constants
-import com.aduilio.viasat.ubersat.entity.Plan
+import com.aduilio.viasat.ubersat.entity.Installer
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-class PlanViewModel : ViewModel() {
+class InstallerViewModel : ViewModel() {
 
-    private lateinit var plansApi: PlanApi
+    private lateinit var installerApi: InstallerApi
 
     init {
         setupHttpClient()
     }
 
-    val plans: MutableLiveData<List<Plan>> by lazy {
-        MutableLiveData<List<Plan>>()
+    val installers: MutableLiveData<List<Installer>> by lazy {
+        MutableLiveData<List<Installer>>()
     }
 
     val showProgress: MutableLiveData<Boolean> by lazy {
@@ -31,18 +31,21 @@ class PlanViewModel : ViewModel() {
         MutableLiveData<Boolean>()
     }
 
-    fun get() {
+    fun get(planId: Long) {
         showProgress.value = true
 
-        plansApi.getPlans().enqueue(object : Callback<List<Plan>> {
-            override fun onResponse(call: Call<List<Plan>>, response: Response<List<Plan>>) {
+        installerApi.getInstallers(planId).enqueue(object : Callback<List<Installer>> {
+            override fun onResponse(
+                call: Call<List<Installer>>,
+                response: Response<List<Installer>>
+            ) {
                 showProgress.value = false
                 setResultSuccess(response.isSuccessful)
 
                 handleResponse(response)
             }
 
-            override fun onFailure(call: Call<List<Plan>>, t: Throwable) {
+            override fun onFailure(call: Call<List<Installer>>, t: Throwable) {
                 showProgress.value = false
                 setResultSuccess(false)
             }
@@ -55,13 +58,13 @@ class PlanViewModel : ViewModel() {
             .addConverterFactory(GsonConverterFactory.create())
             .build()
 
-        plansApi = retrofit.create(PlanApi::class.java)
+        installerApi = retrofit.create(InstallerApi::class.java)
     }
 
-    private fun handleResponse(response: Response<List<Plan>>) {
+    private fun handleResponse(response: Response<List<Installer>>) {
         if (response.isSuccessful) {
             response.body()?.let {
-                plans.value = it
+                installers.value = it
             }
         }
     }

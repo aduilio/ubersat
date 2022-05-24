@@ -1,7 +1,8 @@
 <resources>
     <string name="app_name">UberSat</string>
     <string name="plan_type_description">Represents the type of the plan</string>
-    <string name="fail_get_plans">Ii was not possible to get the plans</string>
+    <string name="fail_get_plans">It was not possible to get the plans</string>
+    <string name="fail_get_installers">It was not possible to get the installers for this plan</string>
     <string name="see_installers">See available installers</string>
     <string name="download_speed_label">"Download speed: %.2fMB"</string>
     <string name="upload_speed_label">"Upload speed: %.2fMB"</string>
@@ -10,4 +11,6 @@
     <string name="price_per_month_label">"Price per month: $%.2f"</string>
     <string name="type_of_internet_label">"Type of internet: %s"</string>
     <string name="satellite">Satellite</string>
+    <string name="price_per_km_label">"Price per Km: $%.2f"</string>
+    <string name="distance_km_label">"Distance: %.2fKm"</string>
 </resources>

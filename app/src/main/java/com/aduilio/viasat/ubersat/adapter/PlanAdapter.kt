@@ -22,6 +22,7 @@ class PlanAdapter : RecyclerView.Adapter<PlanAdapter.ViewHolder>() {
         const val TYPE_SATELLITE = "sat"
         const val TYPE_WIRE = "wire"
 
+        const val COMPOUND_DRAWABLE_LEFT_INDEX = 0
     }
 
     private val plans: MutableList<Plan> = mutableListOf()
@@ -81,9 +82,21 @@ class PlanAdapter : RecyclerView.Adapter<PlanAdapter.ViewHolder>() {
         val binding: PlanItemBinding = PlanItemBinding.bind(view)
 
         init {
-            binding.tvPlanDownload.compoundDrawables[0].setTint(Color.parseColor("#016949"))
-            binding.tvPlanUpload.compoundDrawables[0].setTint(Color.parseColor("#03489c"))
-            binding.tvPlanCapacity.compoundDrawables[0].setTint(Color.parseColor("#F34646"))
+            binding.tvPlanDownload.compoundDrawables[COMPOUND_DRAWABLE_LEFT_INDEX].setTint(
+                Color.parseColor(
+                    "#016949"
+                )
+            )
+            binding.tvPlanUpload.compoundDrawables[COMPOUND_DRAWABLE_LEFT_INDEX].setTint(
+                Color.parseColor(
+                    "#03489c"
+                )
+            )
+            binding.tvPlanCapacity.compoundDrawables[COMPOUND_DRAWABLE_LEFT_INDEX].setTint(
+                Color.parseColor(
+                    "#F34646"
+                )
+            )
         }
     }
 }

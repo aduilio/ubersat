@@ -1,4 +1,4 @@
-package com.aduilio.viasat.ubersat
+package com.aduilio.viasat.ubersat.api
 
 import com.aduilio.viasat.ubersat.entity.Plan
 import retrofit2.Call
