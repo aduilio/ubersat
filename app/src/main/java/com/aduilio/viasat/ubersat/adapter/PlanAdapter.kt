@@ -1,12 +1,14 @@
 package com.aduilio.viasat.ubersat.adapter
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.aduilio.viasat.ubersat.R
+import com.aduilio.viasat.ubersat.activity.PlanActivity
 import com.aduilio.viasat.ubersat.databinding.PlanItemBinding
 import com.aduilio.viasat.ubersat.entity.Plan
 
@@ -53,6 +55,15 @@ class PlanAdapter : RecyclerView.Adapter<PlanAdapter.ViewHolder>() {
             viewHolder.binding.tvPlanDownload.text = "$downloadSpeed$MEGA_BYTES"
             viewHolder.binding.tvPlanUpload.text = "$uploadSpeed$MEGA_BYTES"
             viewHolder.binding.tvPlanPrice.text = "$$pricePerMonth"
+
+            val context = viewHolder.itemView.context
+            viewHolder.itemView.setOnClickListener {
+                val intent = Intent(
+                    context,
+                    PlanActivity::class.java
+                ).putExtra(PlanActivity.PLAN_PARAM, this)
+                context.startActivity(intent)
+            }
         }
     }
 
