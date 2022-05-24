@@ -13,4 +13,5 @@
     <string name="satellite">Satellite</string>
     <string name="price_per_km_label">"Price per Km: $%.2f"</string>
     <string name="distance_km_label">"Distance: %.2fKm"</string>
+    <string name="no_installers">There are no installers available for this plan.</string>
 </resources>

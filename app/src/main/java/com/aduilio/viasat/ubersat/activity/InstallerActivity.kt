@@ -1,6 +1,8 @@
 package com.aduilio.viasat.ubersat.activity
 
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.view.MenuItem
 import android.view.View
 import androidx.activity.viewModels
@@ -45,7 +47,15 @@ class InstallerActivity : AppCompatActivity() {
 
     private fun setupViewModel() {
         installerViewModel.installers.observe(this) {
-            installerAdapter.setInstallers(it)
+            if (it.isEmpty()) {
+                Snackbar.make(binding.root, R.string.no_installers, Snackbar.LENGTH_LONG)
+                    .show()
+                Handler(Looper.getMainLooper()).postDelayed({
+                    onBackPressed()
+                }, 1000)
+            } else {
+                installerAdapter.setInstallers(it)
+            }
         }
 
         installerViewModel.showProgress.observe(this) { show ->
