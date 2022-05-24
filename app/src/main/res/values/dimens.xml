@@ -4,4 +4,5 @@
     <dimen name="margin_internal">8dp</dimen>
 
     <dimen name="item_icon_size">30dp</dimen>
+    <dimen name="action_icon_size">40dp</dimen>
 </resources>

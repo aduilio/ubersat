@@ -3,14 +3,15 @@ package com.aduilio.viasat.ubersat.adapter
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.graphics.Color
+import android.net.Uri
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.aduilio.viasat.ubersat.R
-import com.aduilio.viasat.ubersat.activity.PlanActivity
 import com.aduilio.viasat.ubersat.databinding.InstallerItemBinding
 import com.aduilio.viasat.ubersat.entity.Installer
+
 
 class InstallerAdapter : RecyclerView.Adapter<InstallerAdapter.ViewHolder>() {
 
@@ -39,11 +40,14 @@ class InstallerAdapter : RecyclerView.Adapter<InstallerAdapter.ViewHolder>() {
             viewHolder.binding.tvInstallerDistance.text =
                 String.format(context.getString(R.string.distance_km_label), pricePerKm)
 
-            viewHolder.itemView.setOnClickListener {
-                val intent = Intent(
-                    context,
-                    PlanActivity::class.java
-                ).putExtra(PlanActivity.PLAN_PARAM, this)
+            viewHolder.binding.ivPhone.setOnClickListener {
+                val intent = Intent(Intent.ACTION_CALL, Uri.parse("tel:" + "11223344"))
+                context.startActivity(intent)
+            }
+
+            viewHolder.binding.ivEmail.setOnClickListener {
+                val intent =
+                    Intent(Intent.ACTION_SENDTO, Uri.parse("mailto:" + "installer@viasat.com"))
                 context.startActivity(intent)
             }
         }

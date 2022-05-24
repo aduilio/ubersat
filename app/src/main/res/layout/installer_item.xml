@@ -24,7 +24,7 @@
             android:textSize="22sp"
             android:textStyle="bold"
             app:drawableTopCompat="@drawable/ic_star_rate"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintBottom_toBottomOf="@id/tvInstallerDistance"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:tint="@color/purple_700"
@@ -63,6 +63,47 @@
             app:layout_constraintStart_toEndOf="@id/tvInstallerRating"
             app:layout_constraintTop_toBottomOf="@id/tvInstallerPrice"
             tools:text="$100" />
+
+        <View
+            android:id="@+id/horizontal_divider"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="@dimen/margin_internal"
+            android:background="@color/card_background"
+            app:layout_constraintTop_toBottomOf="@id/tvInstallerDistance" />
+
+        <ImageView
+            android:id="@+id/ivPhone"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/action_icon_size"
+            android:layout_marginTop="@dimen/margin_internal"
+            app:layout_constraintEnd_toStartOf="@id/ivEmail"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/horizontal_divider"
+            app:srcCompat="@drawable/ic_phone"
+            app:tint="@color/green_700" />
+
+        <ImageView
+            android:id="@+id/ivEmail"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/action_icon_size"
+            android:layout_marginTop="@dimen/margin_internal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/ivPhone"
+            app:layout_constraintTop_toBottomOf="@id/horizontal_divider"
+            app:srcCompat="@drawable/ic_email"
+            app:tint="@color/blue_700" />
+
+        <View
+            android:id="@+id/vertical_divider"
+            android:layout_width="1dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="@dimen/margin_internal"
+            android:background="@color/card_background"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/ivEmail"
+            app:layout_constraintStart_toEndOf="@id/ivPhone"
+            app:layout_constraintTop_toBottomOf="@id/horizontal_divider" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
