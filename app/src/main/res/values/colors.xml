@@ -8,6 +8,11 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
 
+    <color name="primary_color">#0086BF</color>
+    <color name="primary_color_variant">#00658F</color>
+    <color name="secondary_color">#A8D048</color>
+    <color name="secondary_color_variant">#647C2B</color>
+
     <color name="green_700">#388E3C</color>
     <color name="blue_700">#1976D2</color>
 
