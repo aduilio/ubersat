@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">UberSat</string>
     <string name="plan_type_description">Represents the type of the plan</string>
+    <string name="fail_get_plans">Ii was not possible get the plans</string>
 </resources>
