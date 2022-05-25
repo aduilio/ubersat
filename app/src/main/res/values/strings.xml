@@ -19,4 +19,7 @@
     <string name="search">Pesquisar</string>
     <string name="cancel">Cancelar</string>
     <string name="no_plans">Nenhum plano disponível</string>
+    <string name="sort_by_distance">Ordenar por distância</string>
+    <string name="sort_by_price">Ordenar por preço</string>
+    <string name="sort_by_rating">Ordenar por classificação</string>
 </resources>

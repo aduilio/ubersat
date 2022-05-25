@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/action_sort_distance"
+        android:title="@string/sort_by_distance"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_sort_price"
+        android:title="@string/sort_by_price"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_sort_rating"
+        android:title="@string/sort_by_rating"
+        app:showAsAction="never" />
+</menu>

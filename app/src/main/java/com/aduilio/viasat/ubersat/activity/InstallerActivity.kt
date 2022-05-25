@@ -6,6 +6,7 @@ import android.location.Location
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import androidx.activity.viewModels
@@ -13,8 +14,8 @@ import androidx.appcompat.app.AppCompatActivity
 import com.aduilio.viasat.ubersat.R
 import com.aduilio.viasat.ubersat.adapter.InstallerAdapter
 import com.aduilio.viasat.ubersat.databinding.ActivityInstallerBinding
-import com.aduilio.viasat.ubersat.viewmodel.AdminAreaViewModel
 import com.aduilio.viasat.ubersat.helper.LocationHelper
+import com.aduilio.viasat.ubersat.viewmodel.AdminAreaViewModel
 import com.aduilio.viasat.ubersat.viewmodel.InstallerViewModel
 import com.google.android.material.snackbar.Snackbar
 import java.util.*
@@ -40,9 +41,18 @@ class InstallerActivity : AppCompatActivity(), LocationHelper.LocationHelperList
         locationHelper = LocationHelper(this, this)
     }
 
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        menuInflater.inflate(R.menu.installers_menu, menu)
+
+        return super.onCreateOptionsMenu(menu)
+    }
+
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        if (item.itemId == android.R.id.home) {
-            this.onBackPressed()
+        when (item.itemId) {
+            android.R.id.home -> this.onBackPressed()
+            R.id.action_sort_distance -> installerAdapter.sortInstallers(compareBy { installer -> installer.distance })
+            R.id.action_sort_price -> installerAdapter.sortInstallers(compareBy { installer -> installer.pricePerKm })
+            R.id.action_sort_rating -> installerAdapter.sortInstallers(compareByDescending { installer -> installer.rating })
         }
 
         return super.onOptionsItemSelected(item)
@@ -105,7 +115,7 @@ class InstallerActivity : AppCompatActivity(), LocationHelper.LocationHelperList
 
     private fun showErrorMessage(success: Boolean) {
         if (!success) {
-            Snackbar.make(binding.root, R.string.fail_get_plans, Snackbar.LENGTH_SHORT)
+            Snackbar.make(binding.root, R.string.fail_get_installers, Snackbar.LENGTH_SHORT)
                 .show()
         }
     }

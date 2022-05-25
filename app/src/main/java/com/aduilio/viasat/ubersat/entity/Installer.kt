@@ -12,5 +12,6 @@ data class Installer(
     @SerializedName("price_per_km")
     var pricePerKm: Double,
     var lat: Double,
-    var lng: Double
+    var lng: Double,
+    var distance: Double
 ) : Parcelable

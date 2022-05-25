@@ -53,6 +53,7 @@ class InstallerAdapter : RecyclerView.Adapter<InstallerAdapter.ViewHolder>() {
                     ), LatLng(lat, lng)
                 )
 
+                this.distance = distance
                 viewHolder.binding.tvInstallerDistance.text =
                     String.format(context.getString(R.string.distance_km_label), distance / 1000)
             }
@@ -71,6 +72,12 @@ class InstallerAdapter : RecyclerView.Adapter<InstallerAdapter.ViewHolder>() {
     fun setInstallers(installers: List<Installer>) {
         this.installers.clear()
         this.installers.addAll(installers)
+
+        notifyDataSetChanged()
+    }
+
+    fun sortInstallers(comparator: Comparator<Installer>) {
+        this.installers.sortWith(comparator)
 
         notifyDataSetChanged()
     }
