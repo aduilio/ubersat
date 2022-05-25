@@ -9,29 +9,11 @@ import androidx.lifecycle.ViewModel
 import com.aduilio.viasat.ubersat.entity.AdminArea
 import java.util.*
 
-class AdminAreaViewModel() : ViewModel() {
+class AdminAreaViewModel : ViewModel() {
 
     val adminAreaCode: MutableLiveData<AdminArea> by lazy {
         MutableLiveData<AdminArea>()
     }
-
-//    fun get(state: String? = null) {
-//        showProgress.value = true
-//
-//        plansApi.getPlans().enqueue(object : Callback<List<Plan>> {
-//            override fun onResponse(call: Call<List<Plan>>, response: Response<List<Plan>>) {
-//                showProgress.value = false
-//                setResultSuccess(response.isSuccessful)
-//
-//                handleResponse(response)
-//            }
-//
-//            override fun onFailure(call: Call<List<Plan>>, t: Throwable) {
-//                showProgress.value = false
-//                setResultSuccess(false)
-//            }
-//        })
-//    }
 
     fun get(location: Location, context: Context) {
         val geocoder = Geocoder(context, Locale.getDefault())
