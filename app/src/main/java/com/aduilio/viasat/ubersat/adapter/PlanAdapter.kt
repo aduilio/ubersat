@@ -15,8 +15,6 @@ import com.aduilio.viasat.ubersat.entity.Plan
 class PlanAdapter : RecyclerView.Adapter<PlanAdapter.ViewHolder>() {
 
     companion object {
-        const val MEGA_BYTES = "MB"
-
         const val TYPE_CABLE = "cable"
         const val TYPE_RADIO = "radio"
         const val TYPE_SATELLITE = "sat"
@@ -34,16 +32,17 @@ class PlanAdapter : RecyclerView.Adapter<PlanAdapter.ViewHolder>() {
         return ViewHolder(view)
     }
 
-    @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
+        val context = viewHolder.itemView.context
+
         plans[position].apply {
             viewHolder.binding.tvPlanName.text = isp
 
             dataCapacity?.let {
-                viewHolder.binding.tvPlanCapacity.visibility = View.VISIBLE
-                viewHolder.binding.tvPlanCapacity.text = "$dataCapacity$MEGA_BYTES"
+                viewHolder.binding.tvPlanCapacity.text =
+                    String.format(context.getString(R.string.data_capacity_value), dataCapacity)
             } ?: run {
-                viewHolder.binding.tvPlanCapacity.visibility = View.INVISIBLE
+                viewHolder.binding.tvPlanCapacity.text = context.getString(R.string.unlimited)
             }
 
             when (typeOfInternet) {
@@ -53,11 +52,13 @@ class PlanAdapter : RecyclerView.Adapter<PlanAdapter.ViewHolder>() {
                 TYPE_WIRE -> viewHolder.binding.ivPlanType.setImageResource(R.drawable.ic_wire)
             }
 
-            viewHolder.binding.tvPlanDownload.text = "$downloadSpeed$MEGA_BYTES"
-            viewHolder.binding.tvPlanUpload.text = "$uploadSpeed$MEGA_BYTES"
-            viewHolder.binding.tvPlanPrice.text = "$$pricePerMonth"
+            viewHolder.binding.tvPlanDownload.text =
+                String.format(context.getString(R.string.download_speed_value), downloadSpeed)
+            viewHolder.binding.tvPlanUpload.text =
+                String.format(context.getString(R.string.upload_speed_value), uploadSpeed)
+            viewHolder.binding.tvPlanPrice.text =
+                String.format(context.getString(R.string.price_value), pricePerMonth)
 
-            val context = viewHolder.itemView.context
             viewHolder.itemView.setOnClickListener {
                 val intent = Intent(
                     context,
@@ -94,7 +95,7 @@ class PlanAdapter : RecyclerView.Adapter<PlanAdapter.ViewHolder>() {
             )
             binding.tvPlanCapacity.compoundDrawables[COMPOUND_DRAWABLE_LEFT_INDEX].setTint(
                 Color.parseColor(
-                    "#F34646"
+                    "#F57C00"
                 )
             )
         }

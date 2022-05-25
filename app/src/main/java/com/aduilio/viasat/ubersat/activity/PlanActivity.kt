@@ -86,10 +86,12 @@ class PlanActivity : AppCompatActivity() {
     }
 
     private fun getType(type: String): String {
-        if (type == PlanAdapter.TYPE_SATELLITE) {
-            return getString(R.string.satellite)
+        return when (type) {
+            PlanAdapter.TYPE_CABLE -> getString(R.string.cable)
+            PlanAdapter.TYPE_RADIO -> getString(R.string.radio)
+            PlanAdapter.TYPE_SATELLITE -> getString(R.string.satellite)
+            PlanAdapter.TYPE_WIRE -> getString(R.string.wire)
+            else -> ""
         }
-
-        return type.replaceFirstChar { it.uppercase() }
     }
 }
