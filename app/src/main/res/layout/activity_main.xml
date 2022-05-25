@@ -31,10 +31,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="@dimen/margin_default"
+        android:text="@string/no_plans"
         android:textAlignment="center"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:text="No installers" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <com.google.android.material.progressindicator.CircularProgressIndicator
         android:id="@+id/cpiPlans"
