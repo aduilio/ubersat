@@ -34,6 +34,15 @@ class PlanActivity : AppCompatActivity() {
             ).putExtra(PLAN_PARAM, planId)
             startActivity(intent)
         }
+
+        binding.btRequestQuote.setOnClickListener {
+            startActivity(
+                Intent(
+                    this@PlanActivity,
+                    QuoteActivity::class.java
+                )
+            )
+        }
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {

@@ -29,6 +29,9 @@
         <activity
             android:name=".activity.InstallerActivity"
             android:exported="false" />
+        <activity
+            android:name=".activity.QuoteActivity"
+            android:exported="false" />
     </application>
 
 </manifest>

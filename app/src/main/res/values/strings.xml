@@ -31,4 +31,11 @@
     <string name="sort_by_distance">Ordenar por distância</string>
     <string name="sort_by_price">Ordenar por preço</string>
     <string name="sort_by_rating">Ordenar por classificação</string>
+    <string name="send">Enviar</string>
+    <string name="name">Nome</string>
+    <string name="address">Endereço</string>
+    <string name="city">Cidade</string>
+    <string name="phone">Telefone</string>
+    <string name="email">Email</string>
+    <string name="quote_sent">Solicitação enviada.</string>
 </resources>
