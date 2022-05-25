@@ -39,7 +39,7 @@ class PlanActivity : AppCompatActivity() {
             startActivity(
                 Intent(
                     this@PlanActivity,
-                    QuoteActivity::class.java
+                    QuoteFormActivity::class.java
                 )
             )
         }

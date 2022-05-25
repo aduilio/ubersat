@@ -38,4 +38,8 @@
     <string name="phone">Telefone</string>
     <string name="email">Email</string>
     <string name="quote_sent">Solicitação enviada.</string>
+    <string name="am_installer">Sou instalador</string>
+    <string name="close_quote">Concluir solicitação</string>
+    <string name="user">Usuário</string>
+    <string name="password">Senha</string>
 </resources>

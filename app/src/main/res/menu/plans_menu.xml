@@ -5,4 +5,8 @@
         android:id="@+id/action_change_state"
         android:title="@string/change_state"
         app:showAsAction="never" />
+    <item
+        android:id="@+id/action_installer"
+        android:title="@string/am_installer"
+        app:showAsAction="never" />
 </menu>

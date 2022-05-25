@@ -1,5 +1,6 @@
 package com.aduilio.viasat.ubersat.activity
 
+import android.content.Intent
 import android.location.Location
 import android.os.Bundle
 import android.view.Menu
@@ -47,6 +48,7 @@ class MainActivity : AppCompatActivity(), LocationHelper.LocationHelperListener 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.action_change_state -> showStateDialog()
+            R.id.action_installer -> showLogin()
         }
 
         return super.onOptionsItemSelected(item)
@@ -127,5 +129,20 @@ class MainActivity : AppCompatActivity(), LocationHelper.LocationHelperListener 
             }
             .setNegativeButton(R.string.cancel, null)
             .show()
+    }
+
+    private fun showLogin() {
+        AlertDialog.Builder(this)
+            .setView(R.layout.dialog_login)
+            .setPositiveButton(R.string.send) { _, _ ->
+                startActivity(
+                    Intent(
+                        this@MainActivity,
+                        QuoteActivity::class.java
+                    )
+                )
+            }
+            .setNegativeButton(R.string.cancel, null)
+            .create().show()
     }
 }

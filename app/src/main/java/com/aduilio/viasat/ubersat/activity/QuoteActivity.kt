@@ -1,17 +1,15 @@
 package com.aduilio.viasat.ubersat.activity
 
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
-import com.aduilio.viasat.ubersat.R
+import com.aduilio.viasat.ubersat.adapter.QuoteAdapter
 import com.aduilio.viasat.ubersat.databinding.ActivityQuoteBinding
-import com.google.android.material.snackbar.Snackbar
 
 class QuoteActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityQuoteBinding
+    private lateinit var quoteAdapter: QuoteAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -20,20 +18,22 @@ class QuoteActivity : AppCompatActivity() {
 
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
-        binding.btConfirm.setOnClickListener {
-            Snackbar.make(binding.root, R.string.quote_sent, Snackbar.LENGTH_LONG)
-                .show()
-            Handler(Looper.getMainLooper()).postDelayed({
-                onBackPressed()
-            }, 1000)
-        }
+        setupComponents()
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        if (item.itemId == android.R.id.home) {
-            this.onBackPressed()
+        when (item.itemId) {
+            android.R.id.home -> this.onBackPressed()
         }
 
         return super.onOptionsItemSelected(item)
+    }
+
+    private fun setupComponents() {
+        quoteAdapter = QuoteAdapter()
+        binding.rvQuotes.setHasFixedSize(true)
+        binding.rvQuotes.adapter = quoteAdapter
+
+        registerForContextMenu(binding.rvQuotes)
     }
 }
