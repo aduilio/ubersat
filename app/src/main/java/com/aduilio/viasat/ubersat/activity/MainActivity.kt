@@ -1,6 +1,8 @@
 package com.aduilio.viasat.ubersat.activity
 
+import android.Manifest
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.location.Location
 import android.os.Bundle
 import android.view.Menu
@@ -9,6 +11,7 @@ import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
 import com.aduilio.viasat.ubersat.R
 import com.aduilio.viasat.ubersat.adapter.PlanAdapter
 import com.aduilio.viasat.ubersat.databinding.ActivityMainBinding
@@ -17,7 +20,6 @@ import com.aduilio.viasat.ubersat.helper.LocationHelper
 import com.aduilio.viasat.ubersat.viewmodel.AdminAreaViewModel
 import com.aduilio.viasat.ubersat.viewmodel.PlanViewModel
 import com.google.android.material.snackbar.Snackbar
-
 
 class MainActivity : AppCompatActivity(), LocationHelper.LocationHelperListener {
 
@@ -35,8 +37,50 @@ class MainActivity : AppCompatActivity(), LocationHelper.LocationHelperListener 
         setupComponents()
         setupViewModel()
 
-        locationHelper = LocationHelper(this, this)
         binding.tvNoPlans.visibility = View.GONE
+
+        if (ActivityCompat.checkSelfPermission(
+                this,
+                Manifest.permission.ACCESS_FINE_LOCATION
+            ) != PackageManager.PERMISSION_GRANTED || ActivityCompat.checkSelfPermission(
+                this,
+                Manifest.permission.ACCESS_COARSE_LOCATION
+            ) != PackageManager.PERMISSION_GRANTED || ActivityCompat.checkSelfPermission(
+                this,
+                Manifest.permission.CALL_PHONE
+            ) != PackageManager.PERMISSION_GRANTED
+        ) {
+            ActivityCompat.requestPermissions(
+                this@MainActivity,
+                arrayOf(Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.CALL_PHONE), 1
+            )
+        } else {
+            locationHelper = LocationHelper(this, this)
+        }
+    }
+
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
+        if (ActivityCompat.checkSelfPermission(
+                this,
+                Manifest.permission.ACCESS_FINE_LOCATION
+            ) != PackageManager.PERMISSION_GRANTED || ActivityCompat.checkSelfPermission(
+                this,
+                Manifest.permission.ACCESS_COARSE_LOCATION
+            ) != PackageManager.PERMISSION_GRANTED || ActivityCompat.checkSelfPermission(
+                this,
+                Manifest.permission.CALL_PHONE
+            ) != PackageManager.PERMISSION_GRANTED
+        ) {
+            onBackPressed()
+        } else {
+            locationHelper = LocationHelper(this, this)
+        }
+
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {

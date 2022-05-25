@@ -76,6 +76,7 @@ class InstallerAdapter : RecyclerView.Adapter<InstallerAdapter.ViewHolder>() {
         notifyDataSetChanged()
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     fun sortInstallers(comparator: Comparator<Installer>) {
         this.installers.sortWith(comparator)
 
