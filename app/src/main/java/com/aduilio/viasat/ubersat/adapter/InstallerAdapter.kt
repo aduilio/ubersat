@@ -3,6 +3,7 @@ package com.aduilio.viasat.ubersat.adapter
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.graphics.Color
+import android.location.Location
 import android.net.Uri
 import android.view.LayoutInflater
 import android.view.View
@@ -11,7 +12,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.aduilio.viasat.ubersat.R
 import com.aduilio.viasat.ubersat.databinding.InstallerItemBinding
 import com.aduilio.viasat.ubersat.entity.Installer
-
+import com.google.android.gms.maps.model.LatLng
+import com.google.maps.android.SphericalUtil
 
 class InstallerAdapter : RecyclerView.Adapter<InstallerAdapter.ViewHolder>() {
 
@@ -20,6 +22,7 @@ class InstallerAdapter : RecyclerView.Adapter<InstallerAdapter.ViewHolder>() {
     }
 
     private val installers: MutableList<Installer> = mutableListOf()
+    private var currentLocation: Location? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context)
@@ -37,12 +40,21 @@ class InstallerAdapter : RecyclerView.Adapter<InstallerAdapter.ViewHolder>() {
             viewHolder.binding.tvInstallerRating.text = rating.toString()
             viewHolder.binding.tvInstallerPrice.text =
                 String.format(context.getString(R.string.price_per_km_label), pricePerKm)
-            viewHolder.binding.tvInstallerDistance.text =
-                String.format(context.getString(R.string.distance_km_label), pricePerKm)
-
             viewHolder.binding.ivPhone.setOnClickListener {
                 val intent = Intent(Intent.ACTION_CALL, Uri.parse("tel:" + "11223344"))
                 context.startActivity(intent)
+            }
+
+            currentLocation?.let {
+                val distance = SphericalUtil.computeDistanceBetween(
+                    LatLng(
+                        currentLocation!!.latitude,
+                        currentLocation!!.longitude
+                    ), LatLng(lat, lng)
+                )
+
+                viewHolder.binding.tvInstallerDistance.text =
+                    String.format(context.getString(R.string.distance_km_label), distance / 1000)
             }
 
             viewHolder.binding.ivEmail.setOnClickListener {
@@ -60,6 +72,12 @@ class InstallerAdapter : RecyclerView.Adapter<InstallerAdapter.ViewHolder>() {
         this.installers.clear()
         this.installers.addAll(installers)
 
+        notifyDataSetChanged()
+    }
+
+    @SuppressLint("NotifyDataSetChanged")
+    fun setCurrentLocation(currentLocation: Location) {
+        this.currentLocation = currentLocation
         notifyDataSetChanged()
     }
 
