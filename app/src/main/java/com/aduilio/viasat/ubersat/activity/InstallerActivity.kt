@@ -13,7 +13,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.aduilio.viasat.ubersat.R
 import com.aduilio.viasat.ubersat.adapter.InstallerAdapter
 import com.aduilio.viasat.ubersat.databinding.ActivityInstallerBinding
-import com.aduilio.viasat.ubersat.helper.AdminAreaHelper
+import com.aduilio.viasat.ubersat.viewmodel.AdminAreaViewModel
 import com.aduilio.viasat.ubersat.helper.LocationHelper
 import com.aduilio.viasat.ubersat.viewmodel.InstallerViewModel
 import com.google.android.material.snackbar.Snackbar
@@ -36,7 +36,6 @@ class InstallerActivity : AppCompatActivity(), LocationHelper.LocationHelperList
 
         setupComponents()
         setupViewModel()
-        getInstallers()
 
         locationHelper = LocationHelper(this, this)
     }
@@ -56,11 +55,11 @@ class InstallerActivity : AppCompatActivity(), LocationHelper.LocationHelperList
         val addresses: List<Address> =
             geocoder.getFromLocation(location.latitude, location.longitude, 1)
 
-        val adminAreaCode = AdminAreaHelper.getAdminAreaCode(addresses[0].adminArea)
+        val adminAreaCode = AdminAreaViewModel.getAdminAreaCode(addresses[0].adminArea)
         adminAreaCode?.let {
-
+            getInstallers()
         } ?: run {
-
+            getInstallers()
         }
     }
 

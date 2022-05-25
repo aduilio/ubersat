@@ -6,14 +6,35 @@
     android:layout_height="match_parent"
     tools:context=".activity.MainActivity">
 
+    <TextView
+        android:id="@+id/tvLocationInfo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/margin_default"
+        android:textAlignment="center"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="Plans for this state" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvPlans"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="0dp"
         android:clipToPadding="false"
         android:paddingBottom="50dp"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvLocationInfo"
         tools:listitem="@layout/plan_item" />
+
+    <TextView
+        android:id="@+id/tvNoPlans"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/margin_default"
+        android:textAlignment="center"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="No installers" />
 
     <com.google.android.material.progressindicator.CircularProgressIndicator
         android:id="@+id/cpiPlans"

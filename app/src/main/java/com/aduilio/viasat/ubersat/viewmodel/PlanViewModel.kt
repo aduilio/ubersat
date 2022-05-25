@@ -31,10 +31,10 @@ class PlanViewModel : ViewModel() {
         MutableLiveData<Boolean>()
     }
 
-    fun get() {
+    fun get(state: String? = null) {
         showProgress.value = true
 
-        plansApi.getPlans().enqueue(object : Callback<List<Plan>> {
+        plansApi.getPlans(state).enqueue(object : Callback<List<Plan>> {
             override fun onResponse(call: Call<List<Plan>>, response: Response<List<Plan>>) {
                 showProgress.value = false
                 setResultSuccess(response.isSuccessful)

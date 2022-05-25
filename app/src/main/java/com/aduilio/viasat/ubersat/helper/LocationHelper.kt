@@ -11,7 +11,7 @@ import androidx.core.app.ActivityCompat
 
 class LocationHelper(
     context: Context,
-    private val listener: LocationHelperListener
+    private var listener: LocationHelperListener?
 ) {
     private var locationByGps: Location? = null
     private var locationByNetwork: Location? = null
@@ -25,7 +25,9 @@ class LocationHelper(
         }
 
         @Deprecated("Deprecated in Java")
-        override fun onStatusChanged(provider: String, status: Int, extras: Bundle) {}
+        override fun onStatusChanged(provider: String, status: Int, extras: Bundle) {
+        }
+
         override fun onProviderEnabled(provider: String) {}
         override fun onProviderDisabled(provider: String) {}
     }
@@ -37,7 +39,9 @@ class LocationHelper(
         }
 
         @Deprecated("Deprecated in Java")
-        override fun onStatusChanged(provider: String, status: Int, extras: Bundle) {}
+        override fun onStatusChanged(provider: String, status: Int, extras: Bundle) {
+        }
+
         override fun onProviderEnabled(provider: String) {}
         override fun onProviderDisabled(provider: String) {}
     }
@@ -105,12 +109,14 @@ class LocationHelper(
                 locationByNetwork
             }
 
-            listener.locationChange(currentLocation!!)
+            listener?.locationChange(currentLocation!!)
         } else if (locationByNetwork != null) {
-            listener.locationChange(locationByNetwork!!)
+            listener?.locationChange(locationByNetwork!!)
         } else if (locationByGps != null) {
-            listener.locationChange(locationByGps!!)
+            listener?.locationChange(locationByGps!!)
         }
+
+        listener = null
     }
 
     interface LocationHelperListener {
